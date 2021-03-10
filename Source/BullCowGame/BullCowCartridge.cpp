@@ -43,7 +43,6 @@ void UBullCowCartridge::SetupGame()
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("You have %i lives!"), Lives);
     PrintLine(TEXT("Type in your guess.\nPress enter to continue..."));
-
 }
 
 void UBullCowCartridge::EndGame(bool bIsGameWon)
@@ -100,22 +99,17 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 
 bool UBullCowCartridge::IsIsogram(FString Word) const
 {
+    // Loop through each letter of Word
     for (int32 i = 0; i < Word.Len(); i++)
     {
-        PrintLine(TEXT("%c"), Word[j]);
+        // Loop through word again
+        for (int32 j = i + 1; j < Word.Len(); j++)
+        {
+            // return false if the letters == each other
+            if (Word[i] == Word[j]) {
+                return false;
+            }
+        }
     }
-
-    // Loop through each letter of Word
-    // for (int32 i = 0; i < Word.Len() - 1; i++)
-    // {
-    //     // Loop through word again
-    //     for (int32 j = 0; j < Word.Len() - 1; j++)
-    //     {
-    //         if (i != j && Word[i] == Word[j])
-    //         {
-    //             return false;
-    //         }
-    //     }
-    // }
     return true;
 }
